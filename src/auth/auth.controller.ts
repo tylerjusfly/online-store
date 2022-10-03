@@ -1,4 +1,14 @@
-import { Controller, Post, Render, Get, Redirect, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Render,
+  Get,
+  Redirect,
+  Body,
+  Req,
+  Res,
+} from '@nestjs/common';
+import { request } from 'http';
 import { User } from 'src/models';
 import { UserService } from 'src/providers/user.service';
 
@@ -28,5 +38,39 @@ export class AuthController {
     newUser.setBalance(1000);
 
     await this.userService.createOrUpdate(newUser);
+  }
+
+  @Get('login')
+  @Render('auth/login')
+  login() {
+    const viewData = [];
+    viewData['title'] = 'User Login - Online Store';
+    viewData['subtitle'] = 'User Login';
+
+    return { viewData };
+  }
+
+  @Post('connect')
+  async connect(@Body() body, @Req() request, @Res() response) {
+    const email = body.email;
+    const password = body.password;
+
+    const user = await this.userService.login(email, password);
+    if (user) {
+      request.session.user = {
+        id: user.getId(),
+        name: user.getName(),
+        role: user.getRole(),
+      };
+      return response.redirect('/');
+    } else {
+      return response.redirect('/auth/login');
+    }
+  }
+
+  @Get('/logout')
+  @Redirect('/')
+  logout(@Req() request) {
+    request.session.user = null;
   }
 }

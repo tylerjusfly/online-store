@@ -17,7 +17,12 @@
       <li> <a href="/about">About</a> </li>
       <li><a href="/products">Products</a></li>
       <div class="border-l"></div>
+      {{#if session.user}}
+      <li><a href="/auth/logout">Logout ({{session.user.name}})</a></li>
+      {{else}}
+      <li><a href="/auth/login">Login</a></li>
       <li><a href="/auth/register">Register</a></li>
+      {{/if}}
      </ul>
     </nav>
     <header class="bg-primary text-white text-center py-4">
