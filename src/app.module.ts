@@ -2,22 +2,24 @@ import { Module, Global } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AdminModule } from './admin/admin.module';
+import { AuthModule } from './auth/auth.module';
 /*Register Product controller in app module */
 import { ProductController } from './products.controller';
 import { db } from './orm.config';
-import { ProductService } from './providers';
-import { Product } from './models';
+import { ProductService, UserService } from './providers';
+import { Product, User } from './models';
 
 @Global() /*Marking the App module Global Scope */
 @Module({
   imports: [
     TypeOrmModule.forRoot(db),
-    TypeOrmModule.forFeature([Product]),
+    TypeOrmModule.forFeature([Product, User]),
     AdminModule,
+    AuthModule,
   ],
   controllers: [AppController, ProductController],
-  providers: [ProductService],
-  exports: [ProductService],
+  providers: [ProductService, UserService],
+  exports: [ProductService, UserService],
 })
 
 /**
