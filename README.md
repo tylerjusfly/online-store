@@ -9,3 +9,8 @@
 ## Admin Page
 
 ![image](https://user-images.githubusercontent.com/53145644/193583760-3c48fceb-52bc-44e8-871d-cca68b86539f.png)
+
+## Products Page
+
+![image](https://user-images.githubusercontent.com/53145644/193631809-3726e250-4682-4dba-a29c-07275d246c06.png)
+
