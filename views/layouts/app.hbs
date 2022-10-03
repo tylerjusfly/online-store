@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="/css/app.css" rel="stylesheet" />
+     <script src="https://cdn.tailwindcss.com"></script>
+  
+    <title>{{#if viewData.title}}{{ viewData.title }}{{else}}Online Store{{/if}}</title>
+  </head>
+  <body>
+    <!-- header -->
+    <nav class="flex justify-between items-center mx-auto px-4 py-4 bg-black text-white">
+     <h1>Party Store</h1>
+     <ul class="flex flex-row mr-5 gap-10">
+      <li><a href="/">Home</a></li>
+      <li> <a href="/about">About</a> </li>
+      <li><a href="/products">Products</a></li>
+     </ul>
+    </nav>
+    <header class="bg-primary text-white text-center py-4">
+      <div class="text-center">
+        <h2 class="text-lg">
+          {{#if viewData.subtitle}}{{ viewData.subtitle }}{{else}}A Nest Online Store{{/if}}
+        </h2>
+      </div>
+    </header>
+    <!-- header -->
+    <div class="my-4">
+      {{> content}}
+    </div>
+
+    <!-- footer -->
+    <div class="copyright py-4 text-center text-white">
+    <div class="container">
+    <small>
+    Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
+    href="https://twitter.com/Tyler_Jusfly">
+    TylerJusfly
+    </a>
+    </small>
+    </div>
+    </div>
+<!-- footer -->
+  </body>
+</html>

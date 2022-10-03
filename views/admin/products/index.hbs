@@ -1,0 +1,85 @@
+{{#> admin}}
+{{#*inline "content"}}
+
+<main class="flex flex-row gap-60">
+
+<div>
+    <h2 class="text-center text-xl pb-5 font-bold">
+        Create Product
+    </h2>
+    <form method="POST" action="/admin/products/store" enctype="multipart/form-data">
+    <div class="grid gap-6 mb-6 md:grid-cols-1">
+        <div>
+            <label for="name" class="block mb-2 text-l font-medium text-black">name</label>
+            <input name="name" type="text" class="bg-gray-50 border border-gray-300 text-white-900 text-sm rounded w-full p-3" required>
+        </div>
+        <div>
+            <label for="price" class="block mb-2 text-l font-medium text-black">Price</label>
+            <input name="price" type="number" class="bg-gray-50 border border-gray-300 text-white-900 text-sm rounded w-full p-3" required>
+        </div>
+        <div>
+            <label for="image" class="block mb-2 text-l font-medium text-black">Image</label>
+            <input class="border border-gray-300 text-white-900 rounded w-full p-3" type="file" name="image">
+        </div>
+        <div>
+            <label for="description" class="block mb-2 text-l font-medium text-black">Desc</label>
+            <textarea class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" name="description" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Submit</button>
+    </div>
+     </form>
+
+</div>
+
+<div>
+<h2 class="text-center text-xl pb-5 font-bold">
+Manage Products
+</h2>
+<div class="overflow-x-auto relative">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Edit</th>
+                <th scope="col" class="text-center">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each viewData.products}}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+               
+                <td class="py-4 px-6">
+                   {{getId}}
+                </td>
+                <td class="py-4 px-6">
+                   {{getName}}
+                </td>
+                <td class="py-4 px-6">
+                    <a class="btn btn-primary" href="/admin/products/{{getId}}">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        class="w-6 h-6 transition duration-75"viewBox="0 0 411.6 411.6" style="enable-background:new 0 0 411.6 411.6;" xml:space="preserve"><path style="fill:#9CE0FF;" d="M296,379.65H40c-17.6,0-32-14.4-32-32v-224c0-17.6,14.4-32,32-32h256c17.6,0,32,14.4,32,32v224 C328,365.25,313.6,379.65,296,379.65z"/><path style="fill:#00AEEF;" d="M296,387.65H40c-22,0-40-18-40-40v-224c0-22,18-40,40-40h228c4.4,0,8,3.6,8,8s-3.6,8-8,8H40	c-13.2,0-24,10.8-24,24v224c0,13.2,10.8,24,24,24h256c13.2,0,24-10.8,24-24v-168c0-4.4,3.6-8,8-8s8 3.6,8,8v168 C336,369.65,318,387.65,296,387.65z"/><path style="fill:#FFC33B;" d="M309.6,58.05l-138.8,139.2c-1.6,1.6-2.4,3.6-2.4,5.6v64.4h64.4c2,0,4-0.8,5.6-2.4l139.2-139.2"/><path style="fill:#F5E6C6;" d="M172.8,199.65H196c2.4,0,4,1.6,4,4v28c0,2.4,1.6,4,4,4h28c2.4,0,4,1.6,4,4v26.4h-63.2V199.65z"/><path style="fill:#C39215;" d="M232.8,275.25h-64.4c-4.4,0-8-3.6-8-8v-64.4c0-4.4,1.6-8.4,4.8-11.2L304,52.45c3.2-3.2,8-3.2,11.2,0	s3.2,8,0,11.2l-138.8,139.2v56.4h56.4L372,120.05c3.2-3.2,8-3.2,11.2,0s3.2,8,0,11.2L244,270.45 C241.2,273.65,237.2,275.25,232.8,275.25z"/><path style="fill:#F285F7;" d="M309.6,58.05l68,68l16.8-16.8c12.4-12.4,12.4-32.8,0-45.2l-22.8-22.8c-12.4-12.4-32.8-12.4-45.2,0 L309.6,58.05z"/><path style="fill:#E229CC;" d="M377.6,134.05c-2,0-4-0.8-5.6-2.4l-68-68c-3.2-3.2-3.2-8,0-11.2l16.8-16.8 c15.6-15.6,40.8-15.6,56.4,0l22.8,22.8c7.6,7.6,11.6,17.6,11.6,28.4s-4,20.8-11.6,28.4l-16.8,16.8 C381.6,133.25,379.6,134.05,377.6,134.05z M320.8,58.05l56.8,56.8l11.2-11.2c4.4-4.4,6.8-10.4,6.8-16.8s-2.4-12.4-6.8-16.8 L366,47.25c-9.2-9.2-24.4-9.2-34,0L320.8,58.05z"/><path style="fill:#C39215;" d="M236,274.05c-4.4,0-8-3.6-8-8v-22.4h-24c-6.8,0-12-5.2-12-12v-24h-19.2c-4.4,0-8-3.6-8-8s3.6-8,8-8 H196c6.8,0,12,5.2,12,12v24h24c6.8,0,12,5.2,12,12v26.4C244,270.45,240.4,274.05,236,274.05z M196,207.65L196,207.65L196,207.65z"/><path style="fill:#6B513A;" d="M160,283.65c-2,0-4-0.8-5.6-2.4c-3.2-3.2-3.2-8,0-11.2l5.6-5.6c3.2-3.2,8-3.2,11.2,0s3.2,8,0,11.2	l-5.6,5.6C164,282.85,162,283.65,160,283.65z"/>
+                    </a>
+                </td>
+                <td class="py-4 px-6">
+                    <form action="/admin/products/{{getId}}" method="POST">
+                    <button>
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 
+                        class="w-6 h-6 transition duration-75"
+                        viewBox="0 0 284.014 284.014" style="enable-background:new 0 0 284.014 284.014;" xml:space="preserve"><g id="XMLID_28_"><path style="fill:#16A085;" d="M227.157,84.284c4.69,2.23,6.7,7.86,4.47,12.55l-2.88,6.06l-145.69-69.19l2.88-6.06 c2.23-4.7,7.87-6.7,12.56-4.47L227.157,84.284z"/><path style="fill:#1ABC9C;" d="M181.687,102.724l-12.24,146.88c-0.67,8.08-7.55,14.41-15.66,14.41h-73.54 c-8.1,0-14.98-6.33-15.65-14.41l-12.24-146.88H181.687z"/><path d="M235.737,66.214c14.65,6.96,20.91,24.55,13.95,39.2l-7.16,15.09c-1.72,3.61-5.3,5.72-9.04,5.72	c-1.44,0-2.9-0.31-4.29-0.97l-28.2-13.4l-11.62,139.41c-1.53,18.36-17.16,32.75-35.59,32.75h-73.54	c-18.42,0-34.05-14.39-35.58-32.75l-13.15-157.71c-0.23-2.78,0.72-5.54,2.61-7.6s4.56-3.23,7.36-3.23h98.18l-74.22-35.25 c-2.39-1.13-4.24-3.18-5.13-5.68c-0.89-2.49-0.75-5.24,0.39-7.64l7.17-15.09c6.96-14.66,24.54-20.92,39.2-13.96l28,13.3l1.46-3.05 c3.07-6.48,8.49-11.38,15.25-13.79c6.76-2.4,14.05-2.03,20.53,1.05l24.13,11.45c13.37,6.36,19.09,22.41,12.74,35.79l-1.46,3.06 L235.737,66.214z M231.627,96.834c2.23-4.69,0.22-10.32-4.47-12.55l-128.66-61.11c-4.69-2.23-10.33-0.23-12.56,4.47l-2.88,6.06 l145.69,69.19L231.627,96.834z M191.117,41.274c1.62-3.42,0.16-7.52-3.26-9.14l-24.12-11.46c-1.65-0.78-3.51-0.88-5.24-0.26 c-1.73,0.61-3.11,1.86-3.9,3.52l-1.45,3.05l36.52,17.35L191.117,41.274z M169.447,249.604l12.24-146.88H52.357l12.24,146.88 c0.67,8.08,7.55,14.41,15.65,14.41h73.54C161.897,264.014,168.777,257.684,169.447,249.604z"/>
+                    </button>
+                    </form>
+                </td>
+            </tr>
+           
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+</div>
+
+</main>
+{{/inline}}
+{{/admin}}
+
+

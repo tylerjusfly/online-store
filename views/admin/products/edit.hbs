@@ -1,0 +1,34 @@
+{{#> admin}}
+{{#*inline "content"}}
+<div>
+    <h2 class="text-center text-xl pb-5 font-bold"> Edit Product </h2>
+</div>
+
+<div class="card-body">
+{{#with viewData.product}}
+<form method="POST" action="/admin/products/{{getId}}/update" enctype="multipart/form-data">
+<div class="grid gap-6 mb-6 md:grid-cols-1">
+    <div>
+            <label for="name" class="block mb-2 text-l font-medium text-black">name</label>
+            <input name="name" type="text" class="bg-gray-50 border border-gray-300 text-white-900 text-sm rounded w-full p-3" value="{{getName}}" required>
+        </div>
+        <div>
+            <label for="price" class="block mb-2 text-l font-medium text-black">Price</label>
+            <input name="price" type="number" class="bg-gray-50 border border-gray-300 text-white-900 text-sm rounded w-full p-3" value="{{getPrice}}" required>
+        </div>
+        <div>
+            <label for="image" class="block mb-2 text-l font-medium text-black">Image</label>
+            <input class="border border-gray-300 text-white-900 rounded w-full p-3" type="file" name="image">
+        </div>
+        <div>
+            <label for="description" class="block mb-2 text-l font-medium text-black">Desc</label>
+            <textarea class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" name="description" rows="3" required>{{getDescription}}</textarea>
+        </div>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Submit</button>
+</div>
+</form>
+
+{{/with}}
+</div>
+{{/inline}}
+{{/admin}}
